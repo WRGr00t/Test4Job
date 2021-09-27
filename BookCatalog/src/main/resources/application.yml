@@ -1,0 +1,10 @@
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+    generate-ddl: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/book_catalog?serverTimezone=UTC
+    username: root
+    password: Va12821282_
