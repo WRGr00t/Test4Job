@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -19,4 +20,10 @@ public class Author {
 
     @Column(nullable = false)
     private String name;
+
+    @ManyToMany
+    @JoinTable(name="author_book",
+            joinColumns = @JoinColumn(name="author_id", referencedColumnName="id"),
+            inverseJoinColumns = @JoinColumn(name="book_id", referencedColumnName="id"))
+    private Set<Book> books;
 }

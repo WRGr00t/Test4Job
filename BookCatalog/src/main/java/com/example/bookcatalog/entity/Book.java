@@ -1,14 +1,12 @@
 package com.example.bookcatalog.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -23,11 +21,8 @@ public class Book {
     @Column(nullable = false)
     private String title;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "author_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
-    private Author author;
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "books")
+    private Set<Author> authors;
 
     @Column(nullable = false)
     private int year;
@@ -37,5 +32,11 @@ public class Book {
 
     @Column(nullable = false)
     String annotation;
+
+    @Column(nullable = false)
+    String bookPic;
+
+    @Column(nullable = false)
+    String bookPath;
 
 }
