@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -26,4 +27,9 @@ public class Author {
             joinColumns = @JoinColumn(name="author_id", referencedColumnName="id"),
             inverseJoinColumns = @JoinColumn(name="book_id", referencedColumnName="id"))
     private Set<Book> books;
+
+    public Author(String name) {
+        this.name = name;
+        this.books = new HashSet<>();
+    }
 }

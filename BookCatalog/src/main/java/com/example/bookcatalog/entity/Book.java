@@ -41,4 +41,46 @@ public class Book {
     @Column(nullable = false)
     String bookPath;
 
+    public static class Builder {
+        private Book newBook;
+
+        public Builder() {
+            newBook = new Book();
+        }
+
+        public Builder withTitle(String title){
+            newBook.setTitle(title);
+            return this;
+        }
+
+        public Builder withYear(int year){
+            newBook.setYear(year);
+            return this;
+        }
+
+        public Builder withCode(String code){
+            newBook.setCode(code);
+            return this;
+        }
+
+        public Builder withAnnotation (String annotation){
+            newBook.setAnnotation(annotation);
+            return this;
+        }
+
+        public Builder withBookPic(String bookPic){
+            newBook.setBookPic(bookPic);
+            return this;
+        }
+
+        public Builder withBookPath(String bookPath){
+            newBook.setBookPath(bookPath);
+            return this;
+        }
+
+        public Book build(){
+            return newBook;
+        }
+    }
+
 }
