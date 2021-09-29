@@ -6,7 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Arrays;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @AllArgsConstructor
