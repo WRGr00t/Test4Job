@@ -40,7 +40,7 @@ public class ApiBookController {
     }
 
     @PostMapping(path = "book")
-    public void addBook(@RequestParam String title,
+    public BookResponse addBook(@RequestParam String title,
                         @RequestParam(required = false) Optional<Integer> year,
                         @RequestParam(required = false) Optional<String> code,
                         @RequestParam(required = false) Optional<String> annotation,
@@ -55,12 +55,20 @@ public class ApiBookController {
         builder.withBookPic(bookPic.orElse("none"));
         builder.withBookPath(bookPath.orElse("none"));
         Book newBook = builder.build();
+        System.out.println(newBook.getTitle());
         Author author = authorService.findByName(authorName);
+        if (author == null) {
+            author = new Author(authorName);
+        }
+        HashSet<Book> addBook = new HashSet<>();
+        addBook.add(newBook);
+        author.setBooks(addBook);
         HashSet<Author> authors = new HashSet<>();
         authors.add(author);
         newBook.setAuthors(authors);
-
-        bookService.addBook(builder.build());
+        newBook = bookService.addBook(builder.build());
+        authorService.addAuthor(authorName);
+        return new BookResponse(newBook);
     }
 
     @PutMapping("book/{id}")

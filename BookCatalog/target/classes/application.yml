@@ -7,4 +7,4 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/book_catalog?serverTimezone=UTC
     username: root
-    password: Va12821282_
+    password: 123456789
