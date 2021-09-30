@@ -7,8 +7,10 @@ import com.example.bookcatalog.service.AuthorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class AuthorServiceImpl implements AuthorService {
@@ -22,7 +24,7 @@ public class AuthorServiceImpl implements AuthorService {
         if (newAuthor == null) {
             newAuthor = new Author(name);
         }
-        return newAuthor;
+        return authorRepo.save(newAuthor);
     }
 
     @Override
@@ -53,5 +55,18 @@ public class AuthorServiceImpl implements AuthorService {
     @Override
     public void delete(int id) {
         authorRepo.delete(authorRepo.findById(id).orElseThrow(() -> new AuthorNotFoundException(id)));
+    }
+
+    public Set<Author> setAuthorsFromString(String authors) {
+        HashSet<Author> authorSet = new HashSet<>();
+        String[] authorsArray = authors.split(", ");
+        for (String name : authorsArray) {
+            Author author = findByName(name);
+            if (author == null) {
+                author = addAuthor(name);
+            }
+            authorSet.add(author);
+        }
+        return authorSet;
     }
 }

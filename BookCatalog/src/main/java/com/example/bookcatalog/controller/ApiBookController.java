@@ -72,19 +72,27 @@ public class ApiBookController {
     }
 
     @PutMapping("book/{id}")
-    public Book editBook(@RequestBody Book newBook, @PathVariable Integer id) {
+    public Book editBook(@RequestParam(required = false) Optional<String> title,
+                         @RequestParam(required = false) Optional<Integer> year,
+                         @RequestParam(required = false) Optional<String> code,
+                         @RequestParam(required = false) Optional<String> annotation,
+                         @RequestParam(required = false) Optional<String> bookPic,
+                         @RequestParam(required = false) Optional<String> bookPath,
+                         @RequestParam(required = false) Optional<String> authorName,
+                         @PathVariable Integer id) {
+        Optional<Book> book = bookService.findById(id);
+        if (book.isPresent()) {
+            Book editBook = book.get();
+            editBook.setTitle(title.orElse(editBook.getTitle()));
+            editBook.setAuthors(authorName.orElse(editBook.getAuthors()));
+            editBook.setBookPath(newBook.getBookPath());
+            editBook.setBookPic(newBook.getBookPic());
+            editBook.setCode(newBook.getCode());
+            editBook.setAnnotation(newBook.getAnnotation());
+            editBook.setYear(newBook.getYear());
+        }
 
-        return bookService.findById(id)
-                .map(book -> {
-                    book.setTitle(newBook.getTitle());
-                    book.setAuthors(newBook.getAuthors());
-                    book.setBookPath(newBook.getBookPath());
-                    book.setBookPic(newBook.getBookPic());
-                    book.setCode(newBook.getCode());
-                    book.setAnnotation(newBook.getAnnotation());
-                    book.setYear(newBook.getYear());
                     return bookService.editBook(book);
-                })
                 .orElseGet(() -> {
                     newBook.setId(id);
                     return bookService.editBook(newBook);
