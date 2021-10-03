@@ -10,7 +10,6 @@ import com.example.bookcatalog.response.SearchBooksResponse;
 import com.example.bookcatalog.service.impl.AuthorServiceImpl;
 import com.example.bookcatalog.service.impl.BookServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
