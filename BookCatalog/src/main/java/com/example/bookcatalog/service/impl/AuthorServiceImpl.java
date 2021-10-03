@@ -1,6 +1,7 @@
 package com.example.bookcatalog.service.impl;
 
 import com.example.bookcatalog.entity.Author;
+import com.example.bookcatalog.entity.Book;
 import com.example.bookcatalog.exception.AuthorNotFoundException;
 import com.example.bookcatalog.repository.AuthorRepo;
 import com.example.bookcatalog.service.AuthorService;
@@ -34,7 +35,6 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public Author findByName(String name) {
-
         return authorRepo.findByName(name);
     }
 
@@ -68,5 +68,15 @@ public class AuthorServiceImpl implements AuthorService {
             authorSet.add(author);
         }
         return authorSet;
+    }
+
+    public void addNewBookToAuthors (Book newBook, Author author) {
+        Set<Book> newBookForAuthor = author.getBooks();
+        newBookForAuthor.add(newBook);
+        author.setBooks(newBookForAuthor);
+    }
+
+    public Author addAuthor (Author author) {
+        return authorRepo.save(author);
     }
 }
