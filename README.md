@@ -1,5 +1,5 @@
 # Test4Job
-spring boot/spring data/spring mvc бэкенд-приложение (электронный каталог книг)<br>
+<f3>spring boot/spring data/spring mvc бэкенд-приложение (электронный каталог книг)</f3><br>
 localhost:8080/api/book/ - <b>GET</b> - получить все книги каталога<br>
 localhost:8080/api/book/<i>{id}</i> - <b>GET</b> - получить книгу с id = {id}<br>
 localhost:8080/api/book/ - <b>POST</b> - внести книгу в БД со строковыми параметрами title(обязательный), year, code, annotation, bookPic, bookPath, authorName(обязательный)<br>
